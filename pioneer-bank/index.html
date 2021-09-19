@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-area">
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input class="form-control" type="text" placeholder="Email" ><br>
+            <input class="form-control" type="password" name="" id="" placeholder="Password" ><br>
+            <button id="login" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4 Deposit">
+               <div class="deposit task">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
+               </div>
+            </div>
+            <div class="col-md-4 Withdraw">
+              <div class="withdraw task">
+                <h5>Withdraw</h5>
+                <h2>$ <span id='currentWithdrow'>00</span></h2>
+              </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance task">
+                    <h5>Balance</h5>
+                    <h2>$ <samp id="currentBalance">1240</samp></h2> 
+                </div>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-md-6">
+               <div class="extre">
+                    <h4>Deposit</h4>
+                    <input id="dopositAmont" type="text" placeholder="$ amount you want to deposit" class="form-control"><br>
+                    <button id="deopsite" type="submit" class="btn btn-success">Deposit</button>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="extre">
+                    <h4>Withdraw</h4>
+                    <input id="witdeowAmount" type="text" placeholder="$ amount you want to withdraw" class="form-control"><br>
+                    <button id="addwithdrow" type="submit" class="btn btn-success">Withdraw</button>
+               </div>
+            </div>
+        </div>       
+    </div>
+    
+
+
+
+
+
+    <script>
+        //login button even handler
+        const login = document.getElementById('login');
+        login.addEventListener('click',function(){
+            const loginAria = document.getElementById('login-area');
+            loginAria.style.display = 'none';
+            const transactionAria = document.getElementById('transaction-area');
+            transactionAria.style.display = 'block';
+        });
+
+        //deposit button event handler
+        var deopsite = document.getElementById('deopsite');
+        deopsite.addEventListener('click',function(){
+            const depositNumber = getInputNumber('dopositAmont')
+
+            updateSpantaxt('currentDeposit',depositNumber);
+
+            updateSpantaxt('currentBalance',depositNumber);
+           
+
+            document.getElementById('dopositAmont').value = '';
+        })
+        // Withdraw BUTTON HANDALE
+       const withdeowBtn = document.getElementById('addwithdrow');
+       withdeowBtn.addEventListener('click',function(){
+            const witdrowNumber = getInputNumber('witdeowAmount')
+            updateSpantaxt('currentWithdrow',witdrowNumber)
+            updateSpantaxt('currentBalance',  -1*witdrowNumber)
+
+            document.getElementById('witdeowAmount').value = '';
+       })
+       function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+       }
+
+
+        function updateSpantaxt(id,depositNumber){
+            var current = document.getElementById(id).innerText;
+            var currentNumber = parseFloat(current);
+            var total= depositNumber + currentNumber;            
+            document.getElementById(id).innerText = total;
+        }
+       
+
+    
+    </script>
+</body>
+</html>
